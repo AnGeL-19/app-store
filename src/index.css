@@ -7,3 +7,22 @@
 
 }
 
+.layout-content{
+  position: relative;
+  margin-left: 258px;
+}
+
+@media screen and (max-width: 992px) {
+
+ 
+
+      .layout-content{
+
+          margin-left: 0;
+          margin-top: 1.5rem;
+
+      }
+  
+
+
+}

@@ -1,8 +1,23 @@
 import React from 'react'
-import { InputText } from 'primereact/inputtext';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Button } from 'primereact/button';
+import { shemaLogin } from '../../../validations/loginShema';
+import { useAuthAdmin } from '../../../hooks/useAuthAdmin';
 
 export const LoginHome = () => {
+
+  const { mutation: auth } = useAuthAdmin();
+
+  const handleSubmit = (data) => {
+
+    auth.mutate({
+        data
+    });
+
+    
+
+  }
+
   return (
     <div className="h-full w-full p-3">
 
@@ -12,13 +27,44 @@ export const LoginHome = () => {
 
           <span className="text-3xl font-bold text-white block text-center">LOGIN</span>
 
-          <form className='flex flex-col gap-8 items-center mt-5'>
-            <InputText type="text" placeholder="Email" className='px-3 py-2 rounded-sm w-5/6' />
-            <InputText type='password' placeholder="Password" className='px-3 py-2 rounded-sm w-5/6' />
-           
-            <Button label="Enter" className='px-3 py-1 font-bold text-base bg-white text-dark w-1/2 mt-5 hover:bg-yellow-50'  />
-          </form>
+          <Formik
+              initialValues={{
+                email: '',
+                password: ''
+              }}
+              validationSchema={shemaLogin}
+              onSubmit={handleSubmit}
+          >
 
+            <Form className='flex flex-col gap-8 items-center mt-5'>
+
+                <div className="flex flex-col items-center gap-1 w-full">
+                  <Field  type="email" 
+                  name="email" 
+                  placeholder="Email" 
+                  className='px-3 py-2 rounded-sm w-5/6'  
+                  />
+                  <ErrorMessage name="email" className='text-red-500' component="p" />
+                </div>
+                
+                <div className="flex flex-col items-center gap-1 w-full">
+                  <Field  type="password" 
+                  name="password" 
+                  placeholder="Password" 
+                  className='px-3 py-2 rounded-sm w-5/6'
+                  />
+                  <ErrorMessage name="password" className='text-red-500' component="p" />
+                </div>
+                
+                <Button 
+                label="Enter" 
+                type="submit"
+                className='px-3 py-1 font-bold text-base bg-white text-dark w-1/2 mt-5 hover:bg-yellow-50'  
+                />
+            </Form>
+
+          </Formik>
+          
         </div>
       </div>
       

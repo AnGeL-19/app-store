@@ -3,23 +3,42 @@ import {
     Outlet,
     Navigate
   } from "react-router-dom";
-import { useAuthAdmin } from '../../hooks/useAuthAdmin';
+
+import { useStoreLogin } from '../../context/storage-login/storageLogin';
+import { HeaderProvider } from '../../context/header/HeaderProvider';
+import { Navbar } from './components/Navbar';
+import { SidebarContent } from './components/SidebarContent';
+import { Footer } from '../common/Footer';
 
 export const PrivateLayout = () => {
 
-  const { authed, ...restAuth } = useAuthAdmin();
+  const { isAuthenticated } = useStoreLogin((state) => state);
 
-  if (!authed) {
+  if (!isAuthenticated) {
      return  <Navigate to="/admin/auth/login" replace />
   }
 
   return (
-    <div>
-        <header>header</header>
-        
-        <Outlet />
+    
+      <div className='h-min-screen w-full'>
+            <div className='relative'>
 
-        <footer>footer</footer>
-    </div>
+                <Navbar/>
+
+                <div className='relative hidden lg:flex'>
+                    <SidebarContent/>
+                </div>
+
+                <div className='layout-content'>
+                    <div className='px-3 min-h-screen flex flex-col justify-between gap-4'>
+                        <HeaderProvider>
+                          <Outlet/>
+                        </HeaderProvider>
+                        <Footer className='py-3 text-center'/>
+                    </div>
+                </div>
+            </div>
+        </div>
   )
+
 }
