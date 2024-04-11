@@ -9,7 +9,7 @@ export const InputSearch = ({filters, name, onGlobalFilterChange}) => {
         <div className='p-input-icon-left border-round-xs'>
             <i className='pi pi-search' />
             <InputText type='text'
-                       className='border-gray-900 text-sm py-2 pl-6'
+                       className='border border-black text-sm py-2.5 pl-6 h-full'
                        value={value || ''}
                        onChange={(e) => onGlobalFilterChange(e)}
                        placeholder="Search..."

@@ -32,7 +32,7 @@ export const HeaderTable = ({filters, setFilters, setVisible, setDataForm}) => {
 
     return (
         <div className='flex flex-wrap-reverse gap-3 justify-end'>
-            <div className='flex flex-wrap flex-grow-1 gap-3 items-start justify-start'>
+            <div className='flex flex-wrap flex-grow-1 gap-3 items-center justify-start'>
                 <InputSearch filters={filters} name='game' onGlobalFilterChange={handleGlobalFilterChange} />
 
                 <InputDropdown label='Price min'

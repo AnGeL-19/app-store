@@ -6,7 +6,7 @@ import { useAuthAdmin } from '../../../hooks/useAuthAdmin';
 
 export const LoginHome = () => {
 
-  const { mutation: auth } = useAuthAdmin();
+  const { mutationLogin: auth, error } = useAuthAdmin();
 
   const handleSubmit = (data) => {
 
@@ -14,8 +14,7 @@ export const LoginHome = () => {
         data
     });
 
-    
-
+  
   }
 
   return (
@@ -27,6 +26,10 @@ export const LoginHome = () => {
 
           <span className="text-3xl font-bold text-white block text-center">LOGIN</span>
 
+          { 
+            error.length !== 0 && <p className='text-red-500 text-center'>{ error }</p>
+          }
+
           <Formik
               initialValues={{
                 email: '',
@@ -36,7 +39,7 @@ export const LoginHome = () => {
               onSubmit={handleSubmit}
           >
 
-            <Form className='flex flex-col gap-8 items-center mt-5'>
+            <Form className='flex flex-col gap-5 items-center mt-5'>
 
                 <div className="flex flex-col items-center gap-1 w-full">
                   <Field  type="email" 
@@ -59,7 +62,7 @@ export const LoginHome = () => {
                 <Button 
                 label="Enter" 
                 type="submit"
-                className='px-3 py-1 font-bold text-base bg-white text-dark w-1/2 mt-5 hover:bg-yellow-50'  
+                className='px-3 py-1 font-bold text-base bg-white text-dark w-1/2 mt-1 hover:bg-yellow-50'  
                 />
             </Form>
 

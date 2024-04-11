@@ -12,6 +12,39 @@
   margin-left: 258px;
 }
 
+.p-datatable .p-datatable-header{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.p-datatable .p-datatable-thead th {
+  background-color: #fff;
+}
+
+.p-datatable .p-datatable-thead > tr > th{
+  font-size: 1.25rem;
+  font-family: 'pprgrotesk-bold', sans-serif;
+  color: #000000;
+}
+
+.p-datatable .p-datatable-tbody > tr > td{
+  color: #000000;
+}
+
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-old{
+  background: '#F5F5F5'
+}
+
+.p-datatable .p-datatable-header{
+  background-color: #fff;
+  border: none;
+}
+
+.p-paginator{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 @media screen and (max-width: 992px) {
 
  

@@ -6,24 +6,18 @@ import { login, useStoreLogin } from '../context/storage-login/storageLogin';
 
 const URL_BASE = 'http://127.0.0.1:8000/auth/login'
 
-
 export const useAuthAdmin = () => {
 
     
     const [error, setError] = useState('')
     
-    const mutation = useMutation({
+    const mutationLogin = useMutation({
       mutationFn: ({data}) => {
-          // return axios.post(URL_BASE, data, {
-          //   headers: {
-          //     "Access-Control-Allow-Origin": "*",
-          //     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-          //   }
-          // })
+          return axios.post(URL_BASE, data)
       },
       onError: (error) => {
           console.error('Error en la petición:', error);
-          setError(error.message);
+          setError(error.response.data.message);
       },
       onSuccess: (response) => {
           console.log(response)
@@ -31,8 +25,10 @@ export const useAuthAdmin = () => {
             login(response.data.user, response.data.success, response.data.access_token )
           }
       },
+
+      
   });
 
 
-  return { mutation, error };
+  return { mutationLogin, error };
 }

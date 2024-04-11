@@ -15,10 +15,7 @@ import { useStoreLogin } from '../../context/storage-login/storageLogin';
 
 export const AuthLayout = () => {
 
-  const { isAuthenticated } = useStoreLogin((state) => state);
-
-
-    console.log(isAuthenticated, 'isAuthenticated');
+    const { isAuthenticated } = useStoreLogin((state) => state);
 
     if (isAuthenticated) {
      

@@ -1,15 +1,28 @@
 
 import React, { useState } from "react";
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useFormik, ErrorMessage } from 'formik';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-
+import { classNames } from 'primereact/utils';
 import { schemaProductsForm } from "../../../../validations/productSchema";
 
 
-export const FormProduct = ({data, onSubmit}) => {
+export const FormProduct = ({data, handleSubmit}) => {
 
-    console.log(data)
-
+    const formik = useFormik({
+        initialValues: {
+            company: data.company ?? {},
+            game: data.game ?? {},
+            stock: data.stock ?? '',
+            price: data.price ?? ''
+        },
+        validationSchema: schemaProductsForm,
+        onSubmit: (data) => {
+            handleSubmit(data)
+            formik.resetForm();
+        }
+    });
 
     const games = [
         { id: 1, name: 'Zelda' },
@@ -23,70 +36,69 @@ export const FormProduct = ({data, onSubmit}) => {
         { id: 3 ,name: 'Steam' },
     ];
 
+    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const getFormErrorMessage = (name) => {
+        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+    };
+
     return (
 
         <div className='w-full h-full px-2 lg:px-5 py-3'>
 
-        <Formik
-              initialValues={{
-                companies: data.companies ?? {},
-                games: data.games ?? {},
-                stock: data.stock ?? '',
-                price: data.price ?? ''
-              }}
-              validationSchema={schemaProductsForm}
-              onSubmit={onSubmit}
-          >
+ 
+            <form onSubmit={formik.handleSubmit} className='flex flex-col items-center gap-3' >
 
-            <Form className='flex flex-col gap-8 items-center mt-5'>
 
-                <div className="flex flex-col gap-1 w-full">
-                <Field
-                    component="select"
-                    name="companies"
-                    multiple={true}
-                >
-                    {
-                        companies.map( company => (
-                            <option key={company.id} value={company.name} >{company.name}</option>
-                        ))
-                    }
-                </Field>
-                  <ErrorMessage name="companies.name" className='text-red-500' component="p" />
+            <div className="col-12">
+                    <Dropdown
+                        name="company" 
+                        placeholder="Companies"
+                        value={formik.values.company} 
+                        onChange={formik.handleChange} 
+                        options={companies} 
+                        optionLabel="name" 
+                        className={`w-full border border-black border-noround ${classNames({ 'p-invalid': isFormFieldValid('company.name') })}`}
+                    />
+                    { (formik.errors && formik.errors.company) && <small className="p-error">{ formik.errors.company.name }</small> }
                 </div>
 
-                <div className="flex flex-col gap-1 w-full">
-                <Field
-                    component="select"
-                    name="games"
-                    multiple={true}
-                >
-                    {
-                        games.map( game => (
-                            <option key={game.id} value={game.name} >{game.name}</option>
-                        ))
-                    }
-                </Field>
-                  <ErrorMessage name="games.name" className='text-red-500' component="p" />
+                <div className="col-12">
+                    <Dropdown
+                        name="game" 
+                        placeholder="Games"
+                        value={formik.values.game} 
+                        onChange={formik.handleChange} 
+                        options={games} 
+                        optionLabel="name" 
+                        className={`w-full border border-black border-noround ${classNames({ 'p-invalid': isFormFieldValid('game.name') })}`}
+                    />
+                    { (formik.errors && formik.errors.game) && <small className="p-error">{ formik.errors.game.name }</small> }
                 </div>
                 
-                <div className="grid">
-                    <div className="col-12 sm:col-6">
-                    <Field  type="number" 
+                <div className="flex flex-row w-full">
+
+                    <div className="col-6">
+                    <InputText
                         name="stock" 
-                        placeholder="Stock" 
-                        className='px-3 py-2 rounded-sm w-full'
-                        />
-                        <ErrorMessage name="stock" className='text-red-500' component="p" />
+                        type="number"
+                        placeholder="Stock"
+                        value={formik.values.stock} 
+                        onChange={formik.handleChange} 
+                        className={`w-full px-3 py-2 border border-black border-noround ${classNames({ 'p-invalid': isFormFieldValid('stock') })}`}
+                    />
+                        {getFormErrorMessage('stock')}
                     </div>
 
-                    <div className="col-12 sm:col-6">
-                    <Field  type="number" 
+                    <div className="col-6">
+                    <InputText
                         name="price" 
-                        placeholder="Price" 
-                        className='px-3 py-2 rounded-sm w-full'
-                        />
-                        <ErrorMessage name="price" className='text-red-500' component="p" />
+                        type="number"
+                        placeholder="Price"
+                        value={formik.values.price} 
+                        onChange={formik.handleChange} 
+                        className={`w-full px-3 py-2 border border-black border-noround ${classNames({ 'p-invalid': isFormFieldValid('price') })}`}
+                    />
+                        {getFormErrorMessage('price')}
                     </div>
 
                 </div>
@@ -95,11 +107,11 @@ export const FormProduct = ({data, onSubmit}) => {
                 <Button 
                 label="Add" 
                 type="submit"
-                className='px-3 py-1 font-bold text-base bg-white text-dark w-1/2 mt-5 hover:bg-yellow-50'  
+                className='px-3 py-2 font-bold text-base bg-white text-dark w-1/2 border rounded border-black'  
                 />
-            </Form>
+            </form>
 
-          </Formik>
+
 
         </div>
     )

@@ -13,7 +13,7 @@ export const InputDropdown = ({ label, selected, options, setSelected }) => {
                           options={options}
                           optionLabel='name'
                           placeholder="Filter"
-                          className='border-gray-900 pl-4 text-sm'
+                          className='border border-black pl-4 text-sm'
                 />
             </div>
             <label htmlFor={label} className='absolute text-xs bg-white px-1' style={{

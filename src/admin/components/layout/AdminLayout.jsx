@@ -5,16 +5,18 @@ import {
  // Route,
  Link
 } from "react-router-dom";
+import { validateAuth } from "../../context/storage-login/storageLogin";
+import { useEffect } from "react";
 
 export const AdminLayout = () => {
+
+  useEffect(() => {
+    validateAuth();
+  }, [])
+  
+
   return (
     <div className="min-h-screen w-full">
-      {/* <h1>ADMIN</h1>
-      <Link to="/admin/products">PRODUCTS</Link>
-      <Link to="/admin/games">GAMES</Link>
-      <Link to="/admin/companies">COMPANIES</Link>
-      <Link to="/admin/auth/login">LOGIN</Link>
-      <hr /> */}
       <Outlet />
     </div>
   )
