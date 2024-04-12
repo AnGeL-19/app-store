@@ -5,7 +5,8 @@ import { productFilter } from '../filters/productFilter';
 import { ModalProduct } from './components/modal/ModalProduct';
 import { TableSkeleton } from '../common/table/TableSkeleton';
 import { productsTableSkeleton } from '../skeleton/productsTableSkeleton'
-import { useProducts } from '../../hooks/useProducts';
+import { useQuery } from '@tanstack/react-query';
+import { postGamesSearch } from '../../api/gamesApi';
 
 export const ProductsHome = () => {
 
@@ -21,16 +22,20 @@ export const ProductsHome = () => {
       }
   }, []);
 
-   const { data: dataProducts, isFetching } = useProducts();
+   // Queries
+   const { data: dataGames, isFetching } = useQuery({ queryKey: ['games'], queryFn: postGamesSearch })
+
+    console.log(dataGames);
 
     if (isFetching){
         return <TableSkeleton columns={productsTableSkeleton}/>
     }
 
+    console.log(dataGames);
 
   return (
     <>
-      <ProductsTable data={dataProducts.data} filters={productFilter} setData={setData} setVisible={setVisible} />
+      <ProductsTable data={dataGames.data ?? []} filters={productFilter} setData={setData} setVisible={setVisible} />
       <ModalProduct dataForm={data} setVisible={setVisible} visible={visible}/>
     </>
     

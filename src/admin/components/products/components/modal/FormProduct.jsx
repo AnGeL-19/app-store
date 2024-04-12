@@ -1,19 +1,24 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik, ErrorMessage } from 'formik';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { schemaProductsForm } from "../../../../validations/productSchema";
+import { getCompanies } from "../../../../api/companiesApi";
+import { useQuery } from "@tanstack/react-query";
+
 
 
 export const FormProduct = ({data, handleSubmit}) => {
 
+    const { data: dataCompanies, isFetching } = useQuery({ queryKey: ['companies'], queryFn: getCompanies })
+
     const formik = useFormik({
         initialValues: {
-            company: data.company ?? {},
-            game: data.game ?? {},
+            company: data.companies ?? {},
+            game: data.name ?? '',
             stock: data.stock ?? '',
             price: data.price ?? ''
         },
@@ -24,18 +29,7 @@ export const FormProduct = ({data, handleSubmit}) => {
         }
     });
 
-    const games = [
-        { id: 1, name: 'Zelda' },
-        { id: 2 ,name: 'Mario' },
-        { id: 3 ,name: 'God of war' },
-    ];
-
-    const companies = [
-        { id: 1, name: 'XBOX' },
-        { id: 2 ,name: 'Nintendo' },
-        { id: 3 ,name: 'Steam' },
-    ];
-
+    
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
     const getFormErrorMessage = (name) => {
         return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
@@ -52,27 +46,27 @@ export const FormProduct = ({data, handleSubmit}) => {
             <div className="col-12">
                     <Dropdown
                         name="company" 
+                        loading={isFetching} 
                         placeholder="Companies"
                         value={formik.values.company} 
                         onChange={formik.handleChange} 
-                        options={companies} 
-                        optionLabel="name" 
+                        options={dataCompanies ? dataCompanies.data : []} 
+                        optionLabel="nombre" 
                         className={`w-full border border-black border-noround ${classNames({ 'p-invalid': isFormFieldValid('company.name') })}`}
                     />
                     { (formik.errors && formik.errors.company) && <small className="p-error">{ formik.errors.company.name }</small> }
                 </div>
 
                 <div className="col-12">
-                    <Dropdown
+                <InputText
                         name="game" 
-                        placeholder="Games"
+                        type="text"
+                        placeholder="Name game"
                         value={formik.values.game} 
                         onChange={formik.handleChange} 
-                        options={games} 
-                        optionLabel="name" 
-                        className={`w-full border border-black border-noround ${classNames({ 'p-invalid': isFormFieldValid('game.name') })}`}
+                        className={`w-full px-3 py-2 border border-black border-noround ${classNames({ 'p-invalid': isFormFieldValid('game') })}`}
                     />
-                    { (formik.errors && formik.errors.game) && <small className="p-error">{ formik.errors.game.name }</small> }
+                    {getFormErrorMessage('game')}
                 </div>
                 
                 <div className="flex flex-row w-full">

@@ -50,7 +50,7 @@ export const HeaderTable = ({filters, setFilters, setVisible, setDataForm}) => {
             </div>
 
 
-            <Button label="AGREGAR"
+            <Button label="ADD"
                         icon='pi pi-plus'
                         type="button"
                         size='large'

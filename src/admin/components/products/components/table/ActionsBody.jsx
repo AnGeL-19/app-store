@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { ItemAction } from "../../../common/table/ItemAction";
+import { useGames } from "../../../../hooks/useGames";
 
 
 
@@ -7,9 +8,18 @@ import { ItemAction } from "../../../common/table/ItemAction";
 export const ActionsBody = (rowData, setData,  setVisible) => {
 
 
+    const { mutationDelPost } = useGames();
+
     const handleData = () => {
         setData(rowData);
         setVisible(true);
+    }
+
+    const handleDelete = () => {
+        console.log(rowData);
+        mutationDelPost.mutate(
+            rowData.id
+        )
     }
 
 
@@ -26,7 +36,7 @@ export const ActionsBody = (rowData, setData,  setVisible) => {
                 <ItemAction label='Delete'
                             className='icon-delete'
                             icon='/assets/icons/delete.svg'
-                            onClick={handleData}
+                            onClick={handleDelete}
                 />
 
             </div>

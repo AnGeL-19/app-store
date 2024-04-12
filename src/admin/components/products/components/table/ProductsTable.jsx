@@ -39,11 +39,13 @@ export const ProductsTable = ({data, filters ,setData,  setVisible }) => {
 
                 <Column field="id" header="ID" style={{ minWidth: '100px' }} />
 
-                <Column field="game.name" header="Game" style={{ minWidth: '100px' }}/>
+                <Column field="nombre" header="Game" style={{ minWidth: '100px' }} />
 
-                <Column field="company.name" header="Company" style={{ minWidth: '100px' }}/>
+                <Column field="companies.nombre" header="Company" style={{ minWidth: '100px' }} />
 
-                <Column field="price" header="Price" style={{ minWidth: '100px' }}/>
+                <Column field="companies.pivot.price" header="Price" style={{ minWidth: '100px' }}/>
+
+                <Column field="companies.pivot.stock" header="Stock" style={{ minWidth: '100px' }}/>
 
                 <Column
                     body={(rowData) => ActionsBody(rowData, setData, setVisible)}
