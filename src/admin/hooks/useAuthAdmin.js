@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {useMutation} from '@tanstack/react-query';
-import { login, useStoreLogin } from '../context/storage-login/storageLogin';
+import { login, logout, useStoreLogin } from '../context/storage-login/storageLogin';
+import { getApi } from '../api/getApi';
 
 
 const URL_BASE = 'http://127.0.0.1:8000/auth/login'
@@ -26,9 +27,24 @@ export const useAuthAdmin = () => {
           }
       },
 
-      
-  });
+    });
+
+    const mutationLogout = useMutation({
+      mutationFn: () => {
+          return getApi.get('/logout')
+      },
+      onError: (error) => {
+          console.error('Error en la petición:', error);
+      },
+      onSuccess: (response) => {
+          console.log(response)
+
+          logout();
+
+      },
+
+    });
 
 
-  return { mutationLogin, error };
+  return { mutationLogin, mutationLogout ,error };
 }

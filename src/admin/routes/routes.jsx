@@ -24,25 +24,21 @@ export const adminRoutes = [
         element: <PrivateLayout /> ,
         children: [
             {
-                path: "profile",
-                element: <ProfileIndex/> ,
-            },  
-            {
                 path: "",
                 element: <CatalogLayout />,
                 children: [
                     {
-                        path: "products",
-                        element: <ProductsIndex/> ,
-                    },
-                    {
                         path: "games",
-                        element: <GamesIndex /> ,
+                        element: <ProductsIndex/>,
                     },
                     {
                         path: "companies",
                         element: <CompaniesIndex />,
-                    }
+                    },
+                    {
+                        path: "profile",
+                        element: <ProfileIndex/> ,
+                    },  
                 ]
             }
             

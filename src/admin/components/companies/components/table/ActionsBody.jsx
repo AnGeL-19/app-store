@@ -1,14 +1,12 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { ItemAction } from "../../../common/table/ItemAction";
-import { useGames } from "../../../../hooks/useGames";
-
-
+import { useCompany } from "../../../../hooks/useCompany";
 
 
 export const ActionsBody = (rowData, setData,  setVisible) => {
 
 
-    const { mutationDelPost } = useGames();
+    const { mutationDelPost } = useCompany();
 
     const handleData = () => {
         setData(rowData);

@@ -19,7 +19,7 @@ export const AuthLayout = () => {
 
     if (isAuthenticated) {
      
-      return  <Navigate to="/admin/products" replace />
+      return  <Navigate to="/admin/games" replace />
     }
 
   return (

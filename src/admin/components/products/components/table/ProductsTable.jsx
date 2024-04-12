@@ -39,13 +39,38 @@ export const ProductsTable = ({data, filters ,setData,  setVisible }) => {
 
                 <Column field="id" header="ID" style={{ minWidth: '100px' }} />
 
-                <Column field="nombre" header="Game" style={{ minWidth: '100px' }} />
+                <Column field="nombre" header="Game" style={{ minWidth: '100px' }}
+                />
 
-                <Column field="companies.nombre" header="Company" style={{ minWidth: '100px' }} />
+                <Column field="companies" header="Company" style={{ minWidth: '100px' }} 
+                    body={(rowData) => (
+                        <>
+                            {
+                                rowData.companies.map( company => (<span key={company.pivot.game_id}>{company.nombre}</span>))
+                            }
+                        </>
+                    )}
+                />
 
-                <Column field="companies.pivot.price" header="Price" style={{ minWidth: '100px' }}/>
+                <Column field="price" header="Price" style={{ minWidth: '100px' }}
+                    body={(rowData) => (
+                        <>
+                            {
+                                rowData.companies.map( company => (<span key={company.pivot.game_id}>{company.pivot.price}</span>))
+                            }
+                        </>
+                    )}
+                />
 
-                <Column field="companies.pivot.stock" header="Stock" style={{ minWidth: '100px' }}/>
+                <Column field="stock" header="Stock" style={{ minWidth: '100px' }}
+                    body={(rowData) => (
+                        <>
+                            {
+                                rowData.companies.map( company => (<span key={company.pivot.game_id}>{company.pivot.stock}</span>))
+                            }
+                        </>
+                    )}
+                />
 
                 <Column
                     body={(rowData) => ActionsBody(rowData, setData, setVisible)}

@@ -1,28 +1,34 @@
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { Button } from 'primereact/button';
 import { InputSearch } from '../../../common/table/header/InputSearch';
 import { InputDropdown } from '../../../common/table/header/InputDropdown';
 
-
-
 export const HeaderTable = ({filters, setFilters, setVisible, setDataForm}) => {
 
-    const [selectedCity, setSelectedCity] = useState(null);
+    const [selectedPriceMin, setSelectedPriceMin] = useState(null);
+    const [selectedPriceMax, setSelectedPriceMax] = useState(null);
 
-    const cities = [
-        { name: '100', code: 'NY' },
-        { name: '2000', code: 'RM' },
+    const prices = [
+        { price: 100 },
+        { price: 500 },
+        { price: 1000 },
+        { price: 1500 },
+        { price: 2000 },
+        { price: 2500 },
     ];
 
-    const handleGlobalFilterChange = (event) => {
+
+    const handleSearchFilterChange = (event) => {
         const value = event.target.value;
         let _filters = { ...filters };
 
-        _filters['game'].value = value;
+        _filters['nombre'].value = value;
 
         setFilters(_filters);
+        
     };
 
+  
 
     const handleShowModal = () => {
         setDataForm({});
@@ -33,19 +39,21 @@ export const HeaderTable = ({filters, setFilters, setVisible, setDataForm}) => {
     return (
         <div className='flex flex-wrap-reverse gap-3 justify-end'>
             <div className='flex flex-wrap flex-grow-1 gap-3 items-center justify-start'>
-                <InputSearch filters={filters} name='game' onGlobalFilterChange={handleGlobalFilterChange} />
+                <InputSearch filters={filters} name='nombre' onGlobalFilterChange={handleSearchFilterChange} />
 
-                <InputDropdown label='Price min'
-                               options={cities}
-                               selected={selectedCity}
-                               setSelected={setSelectedCity}
+                {/* <InputDropdown label='Price min'
+                               name='price'
+                               options={prices}
+                               selected={selectedPriceMin}
+                               setSelected={setSelectedPriceMin}
                 />
 
                 <InputDropdown label='Price max'
-                               options={cities}
-                               selected={selectedCity}
-                               setSelected={setSelectedCity}
-                />
+                               name='price'
+                               options={prices}
+                               selected={selectedPriceMax}
+                               setSelected={setSelectedPriceMax}
+                /> */}
 
             </div>
 

@@ -16,14 +16,14 @@ export const ProductsHome = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-      handleHandleTitle('Products', false)
+      handleHandleTitle('Games', false)
       return () => {
           handleHandleTitle('', false)
       }
   }, []);
 
    // Queries
-   const { data: dataGames, isFetching } = useQuery({ queryKey: ['games'], queryFn: postGamesSearch })
+   const { data: dataGames, isFetching, isError } = useQuery({ queryKey: ['games'], queryFn: () => postGamesSearch('') })
 
     console.log(dataGames);
 
@@ -31,7 +31,9 @@ export const ProductsHome = () => {
         return <TableSkeleton columns={productsTableSkeleton}/>
     }
 
-    console.log(dataGames);
+    if (isError){
+      return <div className='w-full'><h2 className='text-2xl text-red-300 text-center'>There was an error loading the data {':('}, <span className='font-bold'>Regresh Page</span></h2></div>
+    }
 
   return (
     <>

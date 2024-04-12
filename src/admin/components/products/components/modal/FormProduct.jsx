@@ -15,12 +15,15 @@ export const FormProduct = ({data, handleSubmit}) => {
 
     const { data: dataCompanies, isFetching } = useQuery({ queryKey: ['companies'], queryFn: getCompanies })
 
+
+    const { pivot, ...companyRest } = data.companies ? data.companies[0] : {};
+
     const formik = useFormik({
         initialValues: {
-            company: data.companies ?? {},
-            game: data.name ?? '',
-            stock: data.stock ?? '',
-            price: data.price ?? ''
+            company: companyRest ?? {},
+            game: data.nombre ?? '',
+            stock: pivot ? pivot.stock : '',
+            price: pivot ? pivot.price : ''
         },
         validationSchema: schemaProductsForm,
         onSubmit: (data) => {
@@ -99,7 +102,7 @@ export const FormProduct = ({data, handleSubmit}) => {
                 
                 
                 <Button 
-                label="Add" 
+                label={data.id ? "Modify" : "Add"} 
                 type="submit"
                 className='px-3 py-2 font-bold text-base bg-white text-dark w-1/2 border rounded border-black'  
                 />

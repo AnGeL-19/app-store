@@ -9,6 +9,7 @@ import { HeaderProvider } from '../../context/header/HeaderProvider';
 import { Navbar } from './components/Navbar';
 import { SidebarContent } from './components/SidebarContent';
 import { Footer } from '../common/Footer';
+import { ToastProvider } from '../../context/toast/ToastProvider';
 
 export const PrivateLayout = () => {
 
@@ -32,7 +33,9 @@ export const PrivateLayout = () => {
                 <div className='layout-content'>
                     <div className='px-3 min-h-screen flex flex-col justify-between gap-4'>
                         <HeaderProvider>
-                          <Outlet/>
+                          <ToastProvider>
+                            <Outlet/>
+                          </ToastProvider>
                         </HeaderProvider>
                         <Footer className='py-3 text-center'/>
                     </div>

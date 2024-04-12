@@ -1,51 +1,40 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import { Dialog } from 'primereact/dialog';
-import { Toast } from 'primereact/toast';
 
-import { FormProduct } from "./FormProduct";
 import { HeaderModal } from "../../../common/header/HeaderModal";
-import { useGames } from "../../../../hooks/useGames";
+import { useCompany } from "../../../../hooks/useCompany";
+import { FormCompany } from "./FormCompany";
 
 
 
+export const ModalCompany = ({visible, setVisible, dataForm }) => {
 
-export const ModalProduct = ({visible, setVisible, dataForm }) => {
 
-
-    const { error, mutationAddPost, mutationModPost } = useGames();
+    const { error, mutationAddPost, mutationModPost } = useCompany();
 
     console.log(dataForm.id);
 
     const handleAddSubmitForm = (data) => {
 
-        console.log(data);
+        console.log(data, 'add');
         mutationAddPost.mutate({
-            ...data,
-            nombre: data.game,
-            company_id: data.company.id
+            ...data
         })
 
-        
-        setVisible(false)
-        showSuccess('Game added')
-        
+        setVisible(false)  
 
     }
 
     const handleModSubmitForm = (data) => {
 
-        console.log(data);
+        console.log(data, 'edit');
         mutationModPost.mutate({
             ...data,
-            nombre: data.game,
-            company_id: data.company.id,
             id: dataForm.id
         })
 
-
         setVisible(false)
-        showSuccess('Game modified')
         
     }
 
@@ -53,14 +42,14 @@ export const ModalProduct = ({visible, setVisible, dataForm }) => {
     return (
         <>
             
-            <Dialog header={<HeaderModal title={dataForm.id ? 'MODIFY PRODUCT' : 'ADD PRODUCT' } />}
+            <Dialog header={<HeaderModal title={dataForm.id ? 'MODIFY COMPANY' : 'ADD COMPANY' } />}
                     visible={visible}
                     onHide={() => setVisible(false)}
                     style={{ width: '50vw' }}
                     breakpoints={{ '960px': '75vw', '641px': '100vw' }}
                     >
      
-                        <FormProduct handleSubmit={ 
+                        <FormCompany handleSubmit={ 
                             dataForm.id 
                             ? handleModSubmitForm 
                             : handleAddSubmitForm

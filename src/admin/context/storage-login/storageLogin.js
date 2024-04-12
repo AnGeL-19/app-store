@@ -10,6 +10,12 @@ const INITAL_VALUES = {
 
 export const useStoreLogin = create(() => (INITAL_VALUES))
 
+export const updateUser = (user) => {
+
+    useStoreLogin.setState((state) => ({ ...state, user }))
+
+}
+
 export const login = (user, isAuthenticated, access_token) => {
 
     localStorage.setItem('authAdmin', JSON.stringify({user,isAuthenticated,access_token}))

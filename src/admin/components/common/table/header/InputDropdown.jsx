@@ -1,7 +1,7 @@
 
 import { Dropdown } from 'primereact/dropdown';
 
-export const InputDropdown = ({ label, selected, options, setSelected }) => {
+export const InputDropdown = ({ label, name, selected, options, setSelected }) => {
 
     return (
         <div className='relative'>
@@ -11,7 +11,7 @@ export const InputDropdown = ({ label, selected, options, setSelected }) => {
                           value={selected}
                           onChange={(e) => setSelected(e.value)}
                           options={options}
-                          optionLabel='name'
+                          optionLabel={name}
                           placeholder="Filter"
                           className='border border-black pl-4 text-sm'
                 />

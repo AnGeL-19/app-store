@@ -8,12 +8,6 @@ export const ItemsContentMenu = () => {
     const navigate = useNavigate();
     const items = [
         {
-            label: 'Products',
-            command: () => {
-                navigate(`/admin/products`, {replace: true});
-            }
-        },
-        {
             label: 'Games',
             command: () => {
                 navigate(`/admin/games`, {replace: true});
