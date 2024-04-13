@@ -12,13 +12,14 @@ export const SidebarMenu = ({ visible, setVisible }) => {
 
     const customHeader = () => {
         return (
-            <span>Kroenen</span>
+            <span className="text-gray-300 text-2xl text-center font-bold block">Kr<img src="/assets/icons/pacman.svg" className="inline "/>enen</span>
         )
     }
 
     return (
         <div>
             <Sidebar
+                lar
                 visible={visible}
                 onHide={() => setVisible(false)}
                 header={customHeader}

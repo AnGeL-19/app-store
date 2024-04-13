@@ -30,10 +30,10 @@ export default function MenuSide() {
 
     return (
         <>
-            <Menu model={items} popup ref={menuLeft} id="popup_menu_left" className='text-white bg-dark-bold' />
+            <Menu model={items} popup ref={menuLeft} id="popup_menu_left" className='text-white bg-dark-bold hover:bg-dark-semibold' />
             <Button icon='pi pi-angle-down' 
             rounded
-            className='border-circle text-black border-none hover:surface-300' 
+            className='border-circle text-white  border-none hover:bg-gray-800' 
             onClick={(event) => menuLeft.current.toggle(event)} 
             aria-controls="popup_menu_left" aria-haspopup />
         </>

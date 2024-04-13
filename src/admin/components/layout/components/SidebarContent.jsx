@@ -18,7 +18,7 @@ export const SidebarContent = () => {
             <div className='h-full flex flex-col justify-between'>
                 <div>
                     <div className="w-full d-flex justify-content-center align-items-center mb-5"
-                        onClick={() => navigate(`/admin/dashboard`, {replace: true})}
+                        onClick={() => navigate(`/admin/games`, {replace: true})}
                     >
                         <span className="text-gray-300 text-4xl text-center font-bold block">Kr<img src="/assets/icons/pacman.svg" className="inline "/>enen</span>
                     </div>
