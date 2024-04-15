@@ -1,6 +1,36 @@
 import React from 'react'
 
-export const Card = () => {
+export const Card = ({game}) => {
+
+    const platforms = [
+        {
+            icon: '/assets/icons/playstation.svg',
+            name: 'playstation',
+        },
+        {
+            icon: '/assets/icons/xbox.svg',
+            name: 'xbox',
+        },
+        {
+            icon: '/assets/icons/steam.svg',
+            name: 'steam',
+        },
+        {
+            icon: '/assets/icons/nintendo.svg',
+            name: 'nintendo',
+        }
+    ]
+
+    const defaultIcon = {
+        icon: '/assets/icons/otherPlatform.svg',
+        name: 'otherplatform',
+    }
+
+    const showIcon = () => {
+        const exist = platforms.find(platform => platform.name.toLowerCase() === game.platform.toLowerCase() )
+        return exist ? exist.icon : defaultIcon.icon
+    }
+
   return (
     <div className="w-56">
 
@@ -10,15 +40,15 @@ export const Card = () => {
               <div className="absolute w-full h-full top-0 left-0 z-20 p-3" >
 
                 <div className=" w-full h-full flex flex-col items-start justify-between">
-                  <img src="/assets/icons/playstation.svg" alt="" className="h-5" />
-                  <span className="font-bold text-xl text-white">Fifa 2023</span>
+                  <img src={showIcon()} alt="" className="h-5" />
+                  <span className="font-bold text-xl text-white">{game.name}</span>
                 </div>
 
               </div>
               
             </div>
-            <div className="bg-dark-strong px-2 py-1 inline-block rounded-md">
-              <span className="text-yellow-light font-semibold">In Stock</span>
+            <div className={`${game.stock !== 0 ? 'bg-dark-strong': 'bg-dark-red-bold'}  px-2 py-1 inline-block rounded-md`}>
+              <span className={`${ game.stock !== 0 ? 'text-yellow-light': 'text-red-medium' }  font-semibold`}>{ game.stock !==0 ? 'In Stock' : 'Sold out' }</span>
             </div>
 
             <div className='mt-1 flex justify-between'>
@@ -31,7 +61,7 @@ export const Card = () => {
                 </div>
               </div>
               <div>
-                <span className='text-xl text-white font-bold'>$1,200</span>
+                <span className='text-xl text-white font-bold'>{game.price}</span>
               </div>
             </div>
 
