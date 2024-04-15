@@ -16,6 +16,8 @@ export default {
         'dark-light': '#2E2E2E',
         'dark-semibold': '#202020',
         'dark-bold': '#1D1D1D',
+        'dark-strong': '#161616',
+        'dark-nav': '#D9D9D9',
         'dark-red-bold': '#282121',
         'dark': '#000000',
         'yellow-light': '#ECEF67',
@@ -27,7 +29,11 @@ export default {
         'blue-playstation': '#0A73D3',
         'green-xbox': '#009229'
       },
+      spacing: {
+        'screen-container': '1024px'
+      },
     },
+    
   },
   plugins: [],
 }

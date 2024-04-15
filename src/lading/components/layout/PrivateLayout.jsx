@@ -20,9 +20,7 @@ export const PrivateLayout = () => {
   return (
     <div>
 
-        <h1>CONTENT</h1>
-
-        <Outlet /> 
+      <Outlet /> 
 
     </div>
 

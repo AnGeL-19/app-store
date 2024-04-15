@@ -1,36 +1,33 @@
+import { InputText } from "primereact/inputtext";
+import { Badge } from 'primereact/badge';
 import {
     Outlet,
    // RouterProvider,
    // Route,
    Link,
   } from "react-router-dom";
+import { Button } from "primereact/button";
+import { Navbar } from "./components/Navbar";
+import { FooterLading } from "../common/FooterLading";
 
 
 
 export const LadingLayout = () => {
 
     return (
-        <div>
-            <h1>Hello World</h1>
+        <div className="min-h-screen w-full bg-dark-bold relative">
 
-            <div>
-              <Link to="/">HOME</Link>
-              <br />
-              <Link to="store">STORE</Link>
-              <br />
-              <Link to="game">GAME</Link>
-              <br />
-              <Link to="cart">CART</Link>
-              <br />
-              <Link to="auth/login">LOGIN</Link>
-              <br />
-              <Link to="auth/register">REGISTER</Link>
-            </div>
-            <hr />
-
-            <Outlet /> 
-  
             
-         </div>
+            <Navbar />
+
+            
+
+            <div className="pt-14 w-screen-container mx-auto px-2 ">
+              <Outlet /> 
+            </div>
+            
+  
+            <FooterLading  className="py-3 w-full text-center text-white" />
+        </div>
     )
   }

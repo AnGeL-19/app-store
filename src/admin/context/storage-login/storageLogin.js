@@ -4,7 +4,8 @@ import { create } from 'zustand'
 const INITAL_VALUES = {
     isAuthenticated: false,
     user: {},
-    access_token: null
+    access_token: null,
+    isLoadingAdmin: true,
 } 
 
 
@@ -20,7 +21,8 @@ export const login = (user, isAuthenticated, access_token) => {
 
     localStorage.setItem('authAdmin', JSON.stringify({user,isAuthenticated,access_token}))
 
-    useStoreLogin.setState((state) => ({ isAuthenticated, user, access_token}))
+    useStoreLogin.setState((state) => ({ isAuthenticated, user, access_token, isLoadingAdmin: false }))
+
 
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Outlet,
     Navigate
@@ -13,11 +13,20 @@ import { ToastProvider } from '../../context/toast/ToastProvider';
 
 export const PrivateLayout = () => {
 
-  const { isAuthenticated } = useStoreLogin((state) => state);
+  const { isAuthenticated, isLoadingAdmin } = useStoreLogin((state) => state);
+
+
 
   if (!isAuthenticated) {
      return  <Navigate to="/admin/auth/login" replace />
   }
+
+  if (isLoadingAdmin) {
+    return <span>Loading...</span>;
+  }
+
+ 
+  
 
   return (
     

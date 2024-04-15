@@ -1,13 +1,10 @@
 import { getApi } from "./getApi";
 import { getToken } from '../context/storage-login/storageLogin';
 
-export const postGamesSearch = async (search = "") => {
+export const postGamesSearch = async ({search = ''}) => {
 
-    const {data} = await getApi.post(`/games/search${search.length !== 0 ? `?name=${search}`: ''}`, {
-        headers: {
-            'Authorization': `Bearer ${getToken()}`
-        }
-    });
+
+    const {data} = await getApi.post(`/games/search${search.length !== 0 ? `?name=${search}`: ''}`);
     return data;
 
 }

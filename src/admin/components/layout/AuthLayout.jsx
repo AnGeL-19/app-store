@@ -6,11 +6,8 @@ import {
    // Route,
    Link,
   } from "react-router-dom";
-import { useAuthAdmin } from '../../hooks/useAuthAdmin';
+
 import { useStoreLogin } from '../../context/storage-login/storageLogin';
-
-
-
 
 
 export const AuthLayout = () => {
@@ -18,7 +15,7 @@ export const AuthLayout = () => {
     const { isAuthenticated } = useStoreLogin((state) => state);
 
     if (isAuthenticated) {
-     
+      
       return  <Navigate to="/admin/games" replace />
     }
 

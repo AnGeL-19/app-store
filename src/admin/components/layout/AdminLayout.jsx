@@ -10,11 +10,11 @@ import { useEffect } from "react";
 
 export const AdminLayout = () => {
 
+
   useEffect(() => {
     validateAuth();
   }, [])
   
-
   return (
     <div className="min-h-screen w-full">
       <Outlet />
