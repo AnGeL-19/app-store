@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Badge } from 'primereact/badge'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
@@ -6,18 +6,23 @@ import { InputText } from 'primereact/inputtext'
 import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
+
+  const [search, setSearch] = useState('')
+
   return (
     <div className="fixed w-full z-50 h-[50px] ">
+                <div className="w-full bg-dark-light h-full absolute opacity-80 top-0 left-0">
+                </div>
                 <div className="blur-xl  w-full bg-dark-light h-full absolute top-0 left-0">
                 </div>
-                <div className="flex items-center w-full bg-dark-light h-full opacity-90">
+                <div className="flex items-center w-full h-full">
                   <nav className="w-screen-container mx-auto relative z-60 px-2 ">
-                    <div className="w-full flex justify-between text-white-light ">
+                    <div className="w-full flex justify-between text-white-light relative z-[51] opacity-100">
 
                       <div className="flex gap-5 items-center">
-                        <div>
+                        <Link to="/">
                           <img src="/assets/icons/pacman.svg" alt="" />
-                        </div>
+                        </Link>
 
                         <div className="flex gap-5">
                           <Link to="/">Store</Link>

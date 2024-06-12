@@ -26,18 +26,18 @@ export const landingRoutes = [
     },
     {
         path: "/",
+        element: <HomeIndex />,
+    },
+    {
+        path: "/",
         element: <PrivateLayout />,
         children: [
-            {
-                path: "",
-                element: <HomeIndex />,
-            },
             {
                 path: "store",
                 element: <StoreIndex />,
             },
             {
-                path: "game",
+                path: "game/:id",
                 element: <GameIndex />,
             },
             {

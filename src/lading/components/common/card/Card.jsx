@@ -1,6 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const Card = ({game}) => {
+
+    const navigate = useNavigate();
 
     const platforms = [
         {
@@ -34,7 +37,9 @@ export const Card = ({game}) => {
   return (
     <div className="w-56">
 
-            <div className="h-72 bg-slate-400 rounded-lg mb-2 relative">
+            <div className="h-72 bg-slate-400 rounded-lg mb-2 relative cursor-pointer"
+              onClick={() => navigate('/game/1')}
+            >
               <div className="w-full h-full bg-gradient-to-b from-gray-800 via-white to-gray-800 bg-gray-800 absolute top-0 left-0 z-10 opacity-30">
               </div>
               <div className="absolute w-full h-full top-0 left-0 z-20 p-3" >

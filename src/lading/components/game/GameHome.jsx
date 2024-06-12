@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
+import { gsap } from "gsap";
 
 export const GameHome = () => {
+
   return (
-    <div>GameHome</div>
+    <div>
+      GAME
+    </div>
   )
 }

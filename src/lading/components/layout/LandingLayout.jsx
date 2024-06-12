@@ -22,7 +22,7 @@ export const LadingLayout = () => {
 
             
 
-            <div className="pt-14 max-w-screen-container mx-auto px-2 ">
+            <div className="pt-14 mx-auto">
               <Outlet /> 
             </div>
             
